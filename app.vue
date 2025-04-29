@@ -1,53 +1,54 @@
 <script setup lang="ts">
-import type { AcceptableValue, CheckboxGroupItem, CheckboxGroupValue, RadioGroupItem } from '@nuxt/ui';
+import type { CheckboxGroupItem, CheckboxGroupValue, RadioGroupItem } from '@nuxt/ui';
 import type { PavilionWithTier, Tier } from './shared/types/pavilion';
 
 const { data } = await useFetch('/api/pavilion')
+const CONST = useConst()
 
 // NOTE: /api/pavilion の変更にリアクティブにならないが、基本的に変更されることはないので許容する
 const pav: PavilionWithTier[] | undefined = data.value?.map(d => ({ ...d, tier: "unchoosed" }))
 const pavilions: Ref<PavilionWithTier[] | undefined> = ref(pav)
 
+
 const reserveFilterItems = ref<CheckboxGroupItem[]>([
-  { "label": "可能", value: 'true' },
-  { "label": "不可", value: 'false' }
+  { "label": CONST.RESERVABLE.CAN, value: String(true) },
+  { "label": CONST.RESERVABLE.CANNNOT, value: String(false) }
 ])
 const typeFilterItems = ref<CheckboxGroupItem[]>([
-  { "label": "海外", value: 'International' },
-  { "label": "シグネチャー", value: 'Signature' },
-  { "label": "企業", value: 'PrivateSectors' },
-  { "label": "自治体/日本政府", value: 'GovAndMunicipal' },
-  { "label": "その他", value: 'Others' },
+  { "label": CONST.PAVILION_TYPE.INTERNATIONAL.JP, value: CONST.PAVILION_TYPE.INTERNATIONAL.EN },
+  { "label": CONST.PAVILION_TYPE.SIGNATURE.JP, value: CONST.PAVILION_TYPE.SIGNATURE.EN },
+  { "label": CONST.PAVILION_TYPE.PRIVATESECTORS.JP, value: CONST.PAVILION_TYPE.PRIVATESECTORS.EN },
+  { "label": CONST.PAVILION_TYPE.GOVANDMUNICIPAL.JP, value: CONST.PAVILION_TYPE.GOVANDMUNICIPAL.EN },
+  { "label": CONST.PAVILION_TYPE.OTHERS.JP, value: CONST.PAVILION_TYPE.OTHERS.EN },
 ])
-const reserveFilterValue = ref<CheckboxGroupValue[]>(["true", "false"])
-const typeFilterValue = ref<CheckboxGroupValue[]>(["International", "Signature", "PrivateSectors", "GovAndMunicipal", "Others"])
+const reserveFilterDefaultValue = [String(true), String(false)]
+const typeFilterDefaultValue = [
+  CONST.PAVILION_TYPE.INTERNATIONAL.EN,
+  CONST.PAVILION_TYPE.SIGNATURE.EN,
+  CONST.PAVILION_TYPE.PRIVATESECTORS.EN,
+  CONST.PAVILION_TYPE.GOVANDMUNICIPAL.EN,
+  CONST.PAVILION_TYPE.OTHERS.EN,
+]
+const reserveFilterValue = ref<CheckboxGroupValue[]>(reserveFilterDefaultValue)
+const typeFilterValue = ref<CheckboxGroupValue[]>(typeFilterDefaultValue)
 
-const isMatchesFilters = (
-  p: PavilionWithTier,
-  reserveValues: AcceptableValue[],
-  typeValues: AcceptableValue[]
-): boolean => {
-  const reserveMatch = reserveValues.includes(String(p.isReservable))
-  const typeMatch = typeValues.includes(p.type)
-
-  return reserveMatch && typeMatch
+const changeReserveFilterValue = (newAry: CheckboxGroupValue[]) => {
+  reserveFilterValue.value = newAry
 }
-
-const filterPavilion = (tier: Tier): PavilionWithTier[] => {
-  return pavilions.value?.filter(p => p.tier === tier && isMatchesFilters(p, reserveFilterValue.value, typeFilterValue.value)) ?? []
+const changeTypeFilterValue = (newAry: CheckboxGroupValue[]) => {
+  typeFilterValue.value = newAry
 }
 
 const tierGroupItem: RadioGroupItem[] = [
-  { label: "S ティア", value: "s-tier" },
-  { label: "A ティア", value: "a-tier" },
-  { label: "B ティア", value: "b-tier" },
-  { label: "C ティア", value: "c-tier" },
-  { label: "D ティア", value: "d-tier" },
-  { label: "未選択", value: "unchoosed" },
+  { label: CONST.TIER.S_TIER.JP, value: CONST.TIER.S_TIER.EN },
+  { label: CONST.TIER.A_TIER.JP, value: CONST.TIER.A_TIER.EN },
+  { label: CONST.TIER.B_TIER.JP, value: CONST.TIER.B_TIER.EN },
+  { label: CONST.TIER.C_TIER.JP, value: CONST.TIER.C_TIER.EN },
+  { label: CONST.TIER.D_TIER.JP, value: CONST.TIER.D_TIER.EN },
+  { label: CONST.TIER.UNCHOOSED.JP, value: CONST.TIER.UNCHOOSED.EN },
 ]
 
 const changeTier = (newTier: Tier, title: string) => {
-  console.log("changeTier")
   const target = pavilions.value?.find(p => p.title === title)
   if (target) {
     target.tier = newTier
@@ -56,38 +57,23 @@ const changeTier = (newTier: Tier, title: string) => {
   }
 }
 
-// ------------------------------
-const pavViewDebug = () => {
-  pavilions.value[0].tier = "s-tier"
-  pavilions.value[1].tier = "a-tier"
-  pavilions.value[2].tier = "b-tier"
-  pavilions.value[3].tier = "c-tier"
-  pavilions.value[4].tier = "d-tier"
+const isPause = ref(false)
+const changeIsPause = (bool: boolean) => {
+  isPause.value = bool
 }
-pavViewDebug()
 </script>
 
 <template>
-  <div>
-    <div>
-      <div>
-        <p>予約可否</p>
-        <UCheckboxGroup v-model="reserveFilterValue" :items="reserveFilterItems" />
-      </div>
-      <div>
-        <p>パビリオンの種類</p>
-        <UCheckboxGroup v-model="typeFilterValue" :items="typeFilterItems" />
-      </div>
-    </div>
-    <div>
-      <TierRow :pavilions="filterPavilion('s-tier')" heading="S" :tier-item="tierGroupItem" @change-tier="changeTier" />
-      <TierRow :pavilions="filterPavilion('a-tier')" heading="A" :tier-item="tierGroupItem" @change-tier="changeTier" />
-      <TierRow :pavilions="filterPavilion('b-tier')" heading="B" :tier-item="tierGroupItem" @change-tier="changeTier" />
-      <TierRow :pavilions="filterPavilion('c-tier')" heading="C" :tier-item="tierGroupItem" @change-tier="changeTier" />
-      <TierRow :pavilions="filterPavilion('d-tier')" heading="D" :tier-item="tierGroupItem" @change-tier="changeTier" />
-      <TierRow :pavilions="filterPavilion('unchoosed')" heading="" :tier-item="tierGroupItem"
+  <div class="h-[100svh] grid grid-rows-[auto_1fr_0.2fr] gap-4 px-[2%] py-[1%]">
+    <TierListHeader :reserve-filter-items :type-filter-items :reserve-filter-default-value :type-filter-default-value
+      :is-pause="isPause" @change-reserve-filter-value="changeReserveFilterValue"
+      @change-type-filter-value="changeTypeFilterValue" @change-is-pause="changeIsPause" />
+    <div class="min-h-0 overflow-y-auto">
+      <TierListTable :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
         @change-tier="changeTier" />
     </div>
+    <TierListSelectingPavilion :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
+      @change-tier="changeTier" />
   </div>
 </template>
 
