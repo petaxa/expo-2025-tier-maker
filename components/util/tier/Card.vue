@@ -31,7 +31,7 @@ watch(tier, () => {
           </div>
         </div>
         <template #content>
-          <URadioGroup v-model="tier" :items="items" variant="table" :legend="title" class="m-2 w-48" />
+          <URadioGroup v-model="tier" :items="items" variant="table" :legend="title" color="secondary" class="m-2 w-48" />
         </template>
       </UPopover>
     </div>

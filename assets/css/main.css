@@ -1,6 +1,46 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+@theme static {
+  /* — ブレークポイント(必要に応じて) — */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 805px;
+  --breakpoint-lg: 1024px;
+
+  --ui-color-primary-50: #ffe5e5;
+  --ui-color-primary-100: #ffb2b2;
+  --ui-color-primary-200: #ff8080;
+  --ui-color-primary-300: #ff4d4d;
+  --ui-color-primary-400: #ff2626;
+  --ui-color-primary-500: #e60012;
+  --ui-color-primary-600: #cc0010;
+  --ui-color-primary-700: #a3000d;
+  --ui-color-primary-800: #7a000a;
+  --ui-color-primary-900: #520007;
+
+  --ui-color-secondary-50: #e5f3ff;
+  --ui-color-secondary-100: #cce8fe;
+  --ui-color-secondary-200: #99d2ff;
+  --ui-color-secondary-300: #65bcff;
+  --ui-color-secondary-400: #32a6ff;
+  --ui-color-secondary-500: #0068b7;
+  --ui-color-secondary-600: #0073cc;
+  --ui-color-secondary-700: #005699;
+  --ui-color-secondary-800: #003966;
+  --ui-color-secondary-900: #001c33;
+
+  --ui-color-neutral-50: #f7f7f7;
+  --ui-color-neutral-100: #e5e5e5;
+  --ui-color-neutral-200: #cccccc;
+  --ui-color-neutral-300: #b2b2b2;
+  --ui-color-neutral-400: #999999;
+  --ui-color-neutral-500: #222426;
+  --ui-color-neutral-600: #1e1e1e;
+  --ui-color-neutral-700: #161616;
+  --ui-color-neutral-800: #0f0f0f;
+  --ui-color-neutral-900: #070707;
+}
+
 html,
 body,
 #__nuxt {
@@ -8,14 +48,7 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* 全体スクロール禁止 */
-}
-
-/* ビューポート高さの乱れを吸収（動的ビューポート対応） */
-#app,
-.nuxt {
-  height: 100svh; /* Chrome/Vivaldi など新ブラウザ用 */
-  height: 100dvh; /* Safari Dynamic Viewport用 fallback */
+  overflow: hidden;
 }
 
 /* セーフエリアパディング */
