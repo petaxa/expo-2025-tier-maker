@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CheckboxGroupItem, CheckboxGroupValue, RadioGroupItem } from '@nuxt/ui';
 import type { PavilionWithTier, Tier } from './shared/types/pavilion';
+import { LazyModalSharing } from '#components'
 
 const { data } = await useFetch('/api/pavilion')
 const CONST = useConst()
@@ -76,26 +77,41 @@ const changeIsPause = (bool: boolean) => {
   isPause.value = bool
 }
 
-const doShareing = () => {
+const { copyText } = useClipboard()
+const overlay = useOverlay()
+const modal = overlay.create(LazyModalSharing)
+const doShareing = async () => {
+  await modal.open()
+
   const origin = useRequestURL().origin
   const query = createTierQueryParam(pavilions.value ?? [])
 
-  navigator.clipboard.writeText(`${origin}${query}`).then(() => console.log("sharing: ", `${origin}${query}`))
+  const url = `${origin}${query}`
+  copyText(url).then(async () => {
+    console.log("copy")
+    await modal.patch({ url })
+  })
+
+  await new Promise(resolve => setTimeout(resolve, 5000))
+  if (!modal.isOpen) await modal.close()
 }
+
 </script>
 
 <template>
-  <div class="
-    h-full w-full bg-gradient-to-b from-neutral-200 end-white grid grid-rows-[auto_1fr_0.2fr] gap-4 px-[2%] py-[1%]">
-    <TierListHeader :reserve-filter-items :type-filter-items :reserve-filter-default-value :type-filter-default-value
-      :is-pause="isPause" @change-reserve-filter-value="changeReserveFilterValue"
-      @change-type-filter-value="changeTypeFilterValue" @change-is-pause="changeIsPause" @do-shareing="doShareing" />
-    <TierListTable :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
-      @change-tier="changeTier" />
-    <TierListSelectingPavilion :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
-      @change-tier="changeTier" />
-    <UtilBackgroundCircle />
-  </div>
+  <UApp>
+    <div class="
+    h-full w-full bg-gradient-to-b from-neutral-200 end-white grid grid-rows-[auto_1fr_auto] gap-4 px-[1vw] py-[1vh]">
+      <TierListHeader :reserve-filter-items :type-filter-items :reserve-filter-default-value :type-filter-default-value
+        :is-pause="isPause" @change-reserve-filter-value="changeReserveFilterValue"
+        @change-type-filter-value="changeTypeFilterValue" @change-is-pause="changeIsPause" @do-shareing="doShareing" />
+      <TierListTable :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
+        @change-tier="changeTier" />
+      <TierListSelectingPavilion :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
+        @change-tier="changeTier" />
+      <UtilBackgroundCircle />
+    </div>
+  </UApp>
 </template>
 
 <style scoped></style>
