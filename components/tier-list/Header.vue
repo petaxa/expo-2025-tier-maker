@@ -13,6 +13,7 @@ const emit = defineEmits<{
   changeReserveFilterValue: [CheckboxGroupValue[]]
   changeTypeFilterValue: [CheckboxGroupValue[]]
   changeIsPause: [boolean]
+  doShareing: []
 }>()
 
 const reserveFilterValue = ref(props.reserveFilterDefaultValue)
@@ -30,6 +31,10 @@ const clickPlayer = () => {
   isPauseValue.value = !isPauseValue.value
   emit("changeIsPause", isPauseValue.value)
 }
+
+const clickShering = () => {
+  emit("doShareing")
+}
 </script>
 
 <template>
@@ -43,7 +48,7 @@ const clickPlayer = () => {
         <h1 class=" text-lg md:text-xl lg:text-3xl font-bold leading-none">ばんぱく！ Tier メーカー！</h1>
       </div>
       <div>
-        <UButton icon="i-tabler-share" size="xl" color="neutral" variant="outline" />
+        <UButton icon="i-tabler-share" size="xl" color="neutral" variant="outline" @click="clickShering" />
         <UButton :icon="isPauseValue ? 'tabler-player-play' : 'i-tabler-player-pause'" size="xl" color="neutral"
           variant="outline" @click="clickPlayer" />
       </div>
