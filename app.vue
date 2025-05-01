@@ -72,11 +72,6 @@ const changeTier = (newTier: Tier, title: string) => {
   }
 }
 
-const isPause = ref(false)
-const changeIsPause = (bool: boolean) => {
-  isPause.value = bool
-}
-
 const { copyText } = useClipboard()
 const overlay = useOverlay()
 const modal = overlay.create(LazyModalSharing)
@@ -103,8 +98,8 @@ const doShareing = async () => {
     <div class="
     h-full w-full bg-gradient-to-b from-neutral-200 end-white grid grid-rows-[auto_1fr_auto] gap-4 px-[1vw] py-[1vh]">
       <TierListHeader :reserve-filter-items :type-filter-items :reserve-filter-default-value :type-filter-default-value
-        :is-pause="isPause" @change-reserve-filter-value="changeReserveFilterValue"
-        @change-type-filter-value="changeTypeFilterValue" @change-is-pause="changeIsPause" @do-shareing="doShareing" />
+        @change-reserve-filter-value="changeReserveFilterValue" @change-type-filter-value="changeTypeFilterValue"
+        @do-shareing="doShareing" />
       <TierListTable :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
         @change-tier="changeTier" />
       <TierListSelectingPavilion :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value

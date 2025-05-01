@@ -6,13 +6,11 @@ const props = defineProps<{
   reserveFilterDefaultValue: CheckboxGroupValue[]
   typeFilterItems: CheckboxGroupItem[]
   typeFilterDefaultValue: CheckboxGroupValue[]
-  isPause: boolean
 }>()
 
 const emit = defineEmits<{
   changeReserveFilterValue: [CheckboxGroupValue[]]
   changeTypeFilterValue: [CheckboxGroupValue[]]
-  changeIsPause: [boolean]
   doShareing: []
 }>()
 
@@ -25,12 +23,6 @@ watch(reserveFilterValue, () => {
 watch(typeFilterValue, () => {
   emit("changeTypeFilterValue", typeFilterValue.value)
 })
-
-const isPauseValue = ref(props.isPause)
-const clickPlayer = () => {
-  isPauseValue.value = !isPauseValue.value
-  emit("changeIsPause", isPauseValue.value)
-}
 
 const clickShering = () => {
   emit("doShareing")
@@ -49,8 +41,6 @@ const clickShering = () => {
       </div>
       <div>
         <UButton icon="i-tabler-share" size="xl" color="neutral" variant="outline" @click="clickShering" />
-        <UButton :icon="isPauseValue ? 'tabler-player-play' : 'i-tabler-player-pause'" size="xl" color="neutral"
-          variant="outline" @click="clickPlayer" />
       </div>
     </div>
     <div class="flex justify-between md:justify-around flex-col md:flex-row">
