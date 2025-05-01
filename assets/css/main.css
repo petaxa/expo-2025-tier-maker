@@ -59,3 +59,27 @@ body {
   padding-right: env(safe-area-inset-right);
   box-sizing: border-box;
 }
+
+/* スクロールバー全体の幅 */
+.scroll-bar::-webkit-scrollbar {
+  height: 0.8rem;
+}
+
+/* スクロールバーのトラック（背景部分） */
+.scroll-bar::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 1vmin;
+}
+
+/* スクロールバーのサム（つまみ部分） */
+.scroll-bar::-webkit-scrollbar-thumb {
+  background-color: var(--ui-color-neutral-400);
+  border-radius: 20vmin;
+  border: 2px solid #ffffff;
+  /* トラックと同色の“余白”を作る */
+}
+
+/* ホバー時に色を濃く */
+.scroll-bar::-webkit-scrollbar-thumb:active {
+  background-color: var(--ui-color-neutral-500);
+}

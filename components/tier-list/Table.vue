@@ -27,7 +27,7 @@ const tiers = [
 </script>
 
 <template>
-  <div class="h-full grid grid-rows-5 gap-[1%]">
+  <div class="h-full grid grid-rows-5 gap-1">
     <div v-for="tier in tiers" :key="tier.en" class="min-h-0 overflow-y-auto">
       <UtilTierRow :pavilions="filterPavilion(pavilions, tier.en, reserveFilterValue, typeFilterValue)"
         :heading="tier.jp" :tier-item="tierGroupItem" card-size="lg" @change-tier="changeTier" />

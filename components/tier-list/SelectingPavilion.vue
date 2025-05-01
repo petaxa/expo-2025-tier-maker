@@ -24,12 +24,12 @@ const changeTier = (newTier: Tier, title: string) => {
   <div class="h-full w-full grid gap-1 grid-rows-[auto_1fr]">
     <div>
       <UDrawer>
-        <UButton class="w-[3%] aspect-2/1 justify-center" color="secondary" variant="solid"
+        <UButton class="w-[2rem] aspect-2/1 justify-center" color="secondary" variant="solid"
           trailing-icon="i-lucide-chevron-up" />
         <template #content>
-          <div class="grid grid-cols-[repeat(auto-fit,7.5rem)] gap-8 overflow-y-scroll p-2">
+          <div class="grid grid-cols-[repeat(auto-fit,110px)] gap-2 p-2 overflow-y-scroll justify-center">
             <UtilTierCard v-for="p in unchoosed" :key="p.title" :title="p.title" :img="p.img" :tier-item="tierGroupItem"
-              :default-tier="p.tier" card-size="md" @change-tier="changeTier" />
+              :default-tier="p.tier" class="place-self-center" card-size="lg" @change-tier="changeTier" />
           </div>
         </template>
       </UDrawer>

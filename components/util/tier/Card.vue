@@ -23,11 +23,11 @@ watch(tier, () => {
 const cardSizeClassName = computed(() => {
   switch (props.cardSize) {
     case "sm":
-      return "w-[30px] md:w-[45px] lg:w-[80px]"
+      return "w-[30px] md:w-[45px] lg:w-[40px]"
     case "md":
-      return "w-[40px] md:w-[60px] lg:w-[100px]"
+      return "w-[50px] md:w-[60px] lg:w-[60px]"
     case "lg":
-      return "w-[50px] md:w-[75px] lg:w-[120px]"
+      return "w-[70px] md:w-[110px] lg:w-[110px]"
     default:
       return ""
   }
