@@ -95,8 +95,9 @@ const doShareing = async () => {
 
 <template>
   <UApp>
-    <div class="
-    h-full w-full bg-gradient-to-b from-neutral-200 end-white grid grid-rows-[auto_1fr_auto] gap-4 px-[1vw] py-[1vh]">
+    <div class="`h-full w-full
+    bg-gradient-to-b from-neutral-200 dark:from-neutral-500 end-white dark:end-black
+    grid grid-rows-[auto_1fr_auto] gap-4 px-[1vw] py-[1vh]">
       <TierListHeader :reserve-filter-items :type-filter-items :reserve-filter-default-value :type-filter-default-value
         @change-reserve-filter-value="changeReserveFilterValue" @change-type-filter-value="changeTypeFilterValue"
         @do-shareing="doShareing" />
