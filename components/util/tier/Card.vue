@@ -7,6 +7,7 @@ const props = defineProps<{
   img: string
   tierItem: RadioGroupItem[]
   defaultTier: Tier
+  cardSize: "sm" | "md" | "lg"
 }>()
 const emit = defineEmits<{
   changeTier: [Tier, string]
@@ -18,23 +19,33 @@ const tier = ref<Tier>(props.defaultTier)
 watch(tier, () => {
   emit("changeTier", tier.value, props.title)
 })
+
+const cardSizeClassName = computed(() => {
+  switch (props.cardSize) {
+    case "sm":
+      return "w-[30px] md:w-[45px] lg:w-[80px]"
+    case "md":
+      return "w-[40px] md:w-[60px] lg:w-[100px]"
+    case "lg":
+      return "w-[50px] md:w-[75px] lg:w-[120px]"
+    default:
+      return ""
+  }
+})
 </script>
 
 <template>
-  <div class="h-full w-full aspect-[1/1] border rounded-[10%] max-h-30">
-    <div class="h-full w-full">
-      <UPopover>
-        <div class="grid grid-rows-[1fr,auto] h-full w-full border rounded-[10%]">
-          <div class="h-full aspect-[1/1] rounded-[10%] overflow-hidden relative">
-            <NuxtImg :src="img" :alt="`パビリオン「${title}」の写真`" width="100%" height="100%"
-              class="w-full h-full object-cover object-center" />
-          </div>
+  <div :class="`aspect-[1/1] border border-secondary-500 rounded-[10%] max-h-30 ${cardSizeClassName}`">
+    <UPopover>
+      <div class="grid grid-rows-[1fr,auto] h-full w-full rounded-[10%]">
+        <div class="h-full aspect-[1/1] rounded-[10%] overflow-hidden relative">
+          <NuxtImg :src="img" :alt="`パビリオン「${title}」の写真`" class="w-full h-full object-cover object-center" />
         </div>
-        <template #content>
-          <URadioGroup v-model="tier" :items="items" variant="table" :legend="title" color="secondary" class="m-2 w-48" />
-        </template>
-      </UPopover>
-    </div>
+      </div>
+      <template #content>
+        <URadioGroup v-model="tier" :items="items" variant="table" :legend="title" color="secondary" class="m-2 w-48" />
+      </template>
+    </UPopover>
   </div>
 </template>
 

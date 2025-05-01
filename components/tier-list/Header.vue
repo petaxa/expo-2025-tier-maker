@@ -40,7 +40,7 @@ const clickPlayer = () => {
           <NuxtImg src="group_join_1.png" class="w-[4rem]" />
           <NuxtImg src="id_growth_1.png" class="w-[2rem]" />
         </div>
-        <h1 class="text-3xl font-bold leading-none">ばんぱく！ Tier メーカー！</h1>
+        <h1 class=" text-lg md:text-xl lg:text-3xl font-bold leading-none">ばんぱく！ Tier メーカー！</h1>
       </div>
       <div>
         <UButton icon="i-tabler-share" size="xl" color="neutral" variant="outline" />
@@ -48,15 +48,25 @@ const clickPlayer = () => {
           variant="outline" @click="clickPlayer" />
       </div>
     </div>
-    <div class="flex justify-around">
+    <div class="flex justify-between md:justify-around flex-col md:flex-row">
       <div>
-        <p class="text-2xl font-bold">予約可否</p>
-        <UCheckboxGroup v-model="reserveFilterValue" size="xl" :items="reserveFilterItems" orientation="horizontal" />
+        <p class="text-sm md:text-base lg:text-2xl font-bold">予約可否</p>
+
+        <UCheckboxGroup v-model="reserveFilterValue" :items="reserveFilterItems" orientation="horizontal" :ui="{
+          fieldset: 'gap-y-0.5 md:gap-y-1 lg:gap-y-1.5',
+          container: 'h-4 md:h-5 lg:h-6',
+          wrapper: 'text-xs md:text-sm lg:text-base',
+        }" />
       </div>
 
       <div>
-        <p class="text-2xl font-bold">パビリオンの種類</p>
-        <UCheckboxGroup v-model="typeFilterValue" size="xl" :items="typeFilterItems" orientation="horizontal" />
+        <p class="text-sm md:text-base lg:text-2xl font-bold">パビリオンの種類</p>
+        <UCheckboxGroup v-model="typeFilterValue" :items="typeFilterItems" orientation="horizontal" :ui="{
+          fieldset: 'gap-y-0.5 md:gap-y-1 lg:gap-y-1.5',
+          container: 'h-4 md:h-5 lg:h-6',
+          wrapper: 'text-xs md:text-sm lg:text-base',
+        }" />
+
       </div>
     </div>
   </div>

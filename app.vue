@@ -64,17 +64,18 @@ const changeIsPause = (bool: boolean) => {
 </script>
 
 <template>
-  <div class="h-[100svh] grid grid-rows-[auto_1fr_0.2fr] gap-4 px-[2%] py-[1%]">
+  <div class="h-full w-full bg-gradient-to-b from-neutral-200 end-white grid grid-rows-[auto_1fr_0.2fr] gap-4 px-[2%] py-[1%]">
     <TierListHeader :reserve-filter-items :type-filter-items :reserve-filter-default-value :type-filter-default-value
       :is-pause="isPause" @change-reserve-filter-value="changeReserveFilterValue"
       @change-type-filter-value="changeTypeFilterValue" @change-is-pause="changeIsPause" />
-    <div class="min-h-0 overflow-y-auto">
-      <TierListTable :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
-        @change-tier="changeTier" />
-    </div>
-    <TierListSelectingPavilion :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
+    <TierListTable :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
       @change-tier="changeTier" />
+    <TierListSelectingPavilion :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value
+      :type-filter-value @change-tier="changeTier" />
+    <UtilBackgroundCircle />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
