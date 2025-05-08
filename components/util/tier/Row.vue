@@ -2,7 +2,7 @@
 import type { RadioGroupItem } from '@nuxt/ui';
 import type { PavilionWithTier, Tier } from '~/shared/types/pavilion';
 
-defineProps<{
+const props = defineProps<{
   pavilions: PavilionWithTier[]
   heading: string
   tierItem: RadioGroupItem[]
@@ -14,10 +14,23 @@ const emit = defineEmits<{
 const changeTier = (newTier: Tier, title: string) => {
   emit("changeTier", newTier, title)
 }
+
+const cardSizeClassName = computed(() => {
+  switch (props.cardSize) {
+    case "sm":
+      return "h-[45px] md:h-[60px] lg:h-[55px]"
+    case "md":
+      return "h-[65px] md:h-[75px] lg:h-[75px]"
+    case "lg":
+      return "h-[85px] md:h-[125px] lg:h-[125px]"
+    default:
+      return ""
+  }
+})
 </script>
 
 <template>
-  <div class="flex h-full w-full gap-4">
+  <div :class="`flex h-full w-full gap-4 ${cardSizeClassName}`">
     <div v-if="heading" class="flex-none">
       <p class="text-2xl font-bold">{{ heading }}</p>
     </div>

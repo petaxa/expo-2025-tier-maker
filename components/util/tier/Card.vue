@@ -39,7 +39,7 @@ const cardSizeClassName = computed(() => {
     <UPopover>
       <div class="grid grid-rows-[1fr,auto] h-full w-full rounded-[10%]">
         <div class="h-full aspect-[1/1] rounded-[10%] overflow-hidden relative">
-          <NuxtImg :src="img" :alt="`パビリオン「${title}」の写真`" class="w-full h-full object-cover object-center" />
+          <NuxtImg :src="img" :alt="`パビリオン「${title}」の写真`" loading="lazy" class="w-full h-full object-cover object-center" />
         </div>
       </div>
       <template #content>
