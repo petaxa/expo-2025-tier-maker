@@ -3,6 +3,13 @@ import type { CheckboxGroupItem, CheckboxGroupValue, RadioGroupItem } from '@nux
 import type { PavilionWithTier, Tier } from './shared/types/pavilion';
 import { LazyModalSharing } from '#components'
 
+const url = useRequestURL()
+useHead({
+  meta: [
+    { property: 'og:url', content: url.href }
+  ]
+})
+
 const { data } = await useFetch('/api/pavilion')
 const CONST = useConst()
 
