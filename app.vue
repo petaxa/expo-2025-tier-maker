@@ -76,7 +76,6 @@ const doShareing = async () => {
 
   const url = `${origin}${query}`
   copyText(url).then(async () => {
-    console.log("copy")
     await modal.patch({ url })
   })
 

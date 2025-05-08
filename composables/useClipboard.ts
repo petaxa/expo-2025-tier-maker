@@ -3,10 +3,7 @@ export default (): { copyText: (text: string) => Promise<void> } => {
     try {
       // 標準の Clipboard API
       await navigator.clipboard.writeText(text);
-      console.log("Clipboard API でコピー成功");
     } catch {
-      console.warn("Clipboard API 失敗、フォールバック実行");
-
       // フォールバック：古いやり方
       const textarea = document.createElement("textarea");
       textarea.value = text;
@@ -19,7 +16,6 @@ export default (): { copyText: (text: string) => Promise<void> } => {
       try {
         const successful = document.execCommand("copy");
         if (!successful) throw new Error("execCommand 失敗");
-        console.log("フォールバックでコピー成功");
       } catch (fallbackErr) {
         console.error("フォールバックでもコピーできませんでした", fallbackErr);
         throw fallbackErr;
