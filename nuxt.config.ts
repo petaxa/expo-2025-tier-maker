@@ -30,7 +30,7 @@ export default defineNuxtConfig({
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "万博ティア表メーカー" },
+        { name: "twitter:title", content: "ばんぱく！Tier メーカー" },
         {
           name: "twitter:description",
           content: "お気に入りのパビリオンをランク付けして共有しよう！",
