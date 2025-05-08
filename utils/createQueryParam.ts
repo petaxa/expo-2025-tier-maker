@@ -1,61 +1,48 @@
 import type { PavilionWithTier } from "~/shared/types/pavilion";
 
+export type OmissionTierGroups = Record<"s" | "a" | "b" | "c" | "d", string[]>;
 export const createTierQueryParam = (pavilions: PavilionWithTier[]): string => {
-  const { sTier, aTier, bTier, cTier, dTier } = assortTier(pavilions);
-  const tiers = { s: sTier, a: aTier, b: bTier, c: cTier, d: dTier };
+  const omissionTier: OmissionTierGroups = assortTier(pavilions);
 
-  const query = Object.entries(tiers)
+  const query = Object.entries(omissionTier)
     .map(([key, value]) => `${key}=${value.join(",")}`)
     .join("&");
 
   return `?${query}`;
 };
 
-const assortTier = (
-  pavilions: PavilionWithTier[]
-): {
-  sTier: string[];
-  aTier: string[];
-  bTier: string[];
-  cTier: string[];
-  dTier: string[];
-  unchoosed: string[];
-} => {
-  const sTier: string[] = [];
-  const aTier: string[] = [];
-  const bTier: string[] = [];
-  const cTier: string[] = [];
-  const dTier: string[] = [];
-  const unchoosed: string[] = [];
+const assortTier = (pavilions: PavilionWithTier[]): OmissionTierGroups => {
+  const s: string[] = [];
+  const a: string[] = [];
+  const b: string[] = [];
+  const c: string[] = [];
+  const d: string[] = [];
+
   pavilions.forEach((p) => {
     switch (p.tier) {
       case "s-tier":
-        sTier.push(p.title);
+        s.push(p.id);
         break;
       case "a-tier":
-        aTier.push(p.title);
+        a.push(p.id);
         break;
       case "b-tier":
-        bTier.push(p.title);
+        b.push(p.id);
         break;
       case "c-tier":
-        cTier.push(p.title);
+        c.push(p.id);
         break;
       case "d-tier":
-        dTier.push(p.title);
-        break;
-      case "unchoosed":
-        unchoosed.push(p.title);
+        d.push(p.id);
         break;
     }
   });
 
   return {
-    sTier,
-    aTier,
-    bTier,
-    cTier,
-    dTier,
-    unchoosed,
+    s,
+    a,
+    b,
+    c,
+    d,
   };
 };

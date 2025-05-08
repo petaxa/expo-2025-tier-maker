@@ -10,19 +10,12 @@ const route = useRoute()
 const pav: Ref<PavilionWithTier[] | undefined> = ref(undefined)
 const pavilions: Ref<PavilionWithTier[] | undefined> = ref(pav)
 onMounted(() => {
-  const params = route.query
+  const tierMapParam = route.query
 
-  type TierGroup = { list: string[], tier: Tier }
-  const tierMap: Record<'s' | 'a' | 'b' | 'c' | 'd', TierGroup> = {
-    s: { list: String(params.s || '').split(','), tier: 's-tier' },
-    a: { list: String(params.a || '').split(','), tier: 'a-tier' },
-    b: { list: String(params.b || '').split(','), tier: 'b-tier' },
-    c: { list: String(params.c || '').split(','), tier: 'c-tier' },
-    d: { list: String(params.d || '').split(','), tier: 'd-tier' },
-  }
+  const tierMap: TierMap = decodePavilionParam(tierMapParam);
 
   pav.value = data.value?.map(ele => {
-    const foundTier = Object.values(tierMap).find(t => t.list.includes(ele.title))
+    const foundTier = Object.values(tierMap).find(t => t.list.includes(ele.id))
     return { ...ele, tier: foundTier?.tier || 'unchoosed' }
   })
 })
@@ -83,7 +76,6 @@ const doShareing = async () => {
 
   const url = `${origin}${query}`
   copyText(url).then(async () => {
-    console.log("copy")
     await modal.patch({ url })
   })
 
