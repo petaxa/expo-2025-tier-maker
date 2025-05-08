@@ -26,6 +26,11 @@ export default defineNuxtConfig({
           content: "お気に入りのパビリオンをランク付けして共有しよう！",
         },
         { property: "og:type", content: "website" },
+        { property: "og:url", content: "https://expo-tier-maker.petaxa.com/" },
+        {
+          property: "og:image",
+          content: "https://expo-tier-maker.petaxa.com/ogp.png",
+        },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
         { name: "twitter:card", content: "summary_large_image" },
@@ -34,6 +39,10 @@ export default defineNuxtConfig({
         {
           name: "twitter:description",
           content: "お気に入りのパビリオンをランク付けして共有しよう！",
+        },
+        {
+          name: "twitter:image",
+          content: "https://expo-tier-maker.petaxa.com/ogp.png",
         },
         { property: "twitter:image:width", content: "1200" },
         { property: "twitter:image:height", content: "630" },
