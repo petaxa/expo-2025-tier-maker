@@ -6,7 +6,9 @@ import { LazyModalSharing } from '#components'
 const url = useRequestURL()
 useHead({
   meta: [
-    { property: 'og:url', content: url.href }
+    { property: 'og:url', content: url.href },
+    { property: "og:image", content: `${url.href}/ogp.png` },
+    { name: "twitter:image", content: `${url.href}/ogp.png` },
   ]
 })
 
