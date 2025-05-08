@@ -22,7 +22,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             # 作業ディレクトリへ
-            cd /home/tempest/あなたのNuxtプロジェクト名
+            cd /home/tempest/Documents/expo-2025-tier-maker
 
             # 最新コードを取得
             git fetch --all
