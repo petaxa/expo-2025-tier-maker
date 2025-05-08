@@ -20,10 +20,10 @@ export default defineNuxtConfig({
             "万博2025のパビリオンをティア表でまとめよう。お気に入りのパビリオンをランク付けして共有できます。",
         },
         { name: "theme-color", content: "#e60012" },
-        { property: "og:title", content: "万博ティア表メーカー" },
+        { property: "og:title", content: "ばんぱく！Tier メーカー" },
         {
           property: "og:description",
-          content: "パビリオンをランク付けして共有しよう！",
+          content: "お気に入りのパビリオンをランク付けして共有しよう！",
         },
         { property: "og:type", content: "website" },
         { property: "og:image", content: "/ogp.png" },
@@ -33,7 +33,7 @@ export default defineNuxtConfig({
         { name: "twitter:title", content: "万博ティア表メーカー" },
         {
           name: "twitter:description",
-          content: "パビリオンをランク付けして共有しよう！",
+          content: "お気に入りのパビリオンをランク付けして共有しよう！",
         },
         { name: "twitter:image", content: "/ogp.png" },
       ],
