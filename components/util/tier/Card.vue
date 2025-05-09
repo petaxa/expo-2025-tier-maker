@@ -35,7 +35,7 @@ const cardSizeClassName = computed(() => {
 </script>
 
 <template>
-  <div :class="`aspect-[1/1] border border-secondary-500 rounded-[10%] max-h-30 ${cardSizeClassName}`">
+  <div :class="`aspect-[1/1] border border-secondary-500 rounded-[10%] max-h-30 cursor-pointer ${cardSizeClassName}`">
     <UPopover>
       <div class="grid grid-rows-[1fr,auto] h-full w-full rounded-[10%]">
         <div class="h-full aspect-[1/1] rounded-[10%] overflow-hidden relative">

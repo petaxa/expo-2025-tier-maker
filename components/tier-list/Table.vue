@@ -11,10 +11,15 @@ defineProps<{
 }>()
 const emit = defineEmits<{
   changeTier: [Tier, string]
+  showTierDetail: [string, PavilionWithTier[], RadioGroupItem[]]
 }>()
 
 const changeTier = (newTier: Tier, title: string) => {
   emit("changeTier", newTier, title)
+}
+
+const showTierDetail = (heading: string, pavilions: PavilionWithTier[], tierGroupItem: RadioGroupItem[]) => {
+  emit("showTierDetail", heading, pavilions, tierGroupItem)
 }
 
 const tiers = [
@@ -30,7 +35,8 @@ const tiers = [
   <div class="h-full grid grid-rows-5 gap-1">
     <div v-for="tier in tiers" :key="tier.en" class="min-h-0 overflow-y-auto">
       <UtilTierRow :pavilions="filterPavilion(pavilions, tier.en, reserveFilterValue, typeFilterValue)"
-        :heading="tier.jp" :tier-item="tierGroupItem" card-size="lg" @change-tier="changeTier" />
+        :heading="tier.jp" :tier-item="tierGroupItem" card-size="lg" @change-tier="changeTier"
+        @show-tier-detail="showTierDetail" />
     </div>
   </div>
 </template>

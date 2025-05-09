@@ -10,9 +10,13 @@ const props = defineProps<{
 }>()
 const emit = defineEmits<{
   changeTier: [Tier, string]
+  showTierDetail: [string, PavilionWithTier[], RadioGroupItem[]]
 }>()
 const changeTier = (newTier: Tier, title: string) => {
   emit("changeTier", newTier, title)
+}
+const showTierDetail = () => {
+  emit("showTierDetail", props.heading, props.pavilions, props.tierItem)
 }
 
 const cardSizeClassName = computed(() => {
@@ -31,7 +35,7 @@ const cardSizeClassName = computed(() => {
 
 <template>
   <div :class="`flex h-full w-full gap-4 ${cardSizeClassName}`">
-    <div v-if="heading" class="flex-none">
+    <div v-if="heading" class="flex-none cursor-pointer" @click="showTierDetail">
       <p class="text-2xl font-bold">{{ heading }}</p>
     </div>
 

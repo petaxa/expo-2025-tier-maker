@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CheckboxGroupItem, CheckboxGroupValue, RadioGroupItem } from '@nuxt/ui';
 import type { PavilionWithTier, Tier } from './shared/types/pavilion';
-import { LazyModalSharing } from '#components'
+import { LazyModalSharing, LazyModalTierDetail } from '#components'
 
 const { data } = await useFetch('/api/pavilion')
 const CONST = useConst()
@@ -67,20 +67,27 @@ const changeTier = (newTier: Tier, title: string) => {
 
 const { copyText } = useClipboard()
 const overlay = useOverlay()
-const modal = overlay.create(LazyModalSharing)
+const sharingModal = overlay.create(LazyModalSharing)
 const doShareing = async () => {
-  await modal.open()
+  await sharingModal.open()
 
   const origin = useRequestURL().origin
   const query = createTierQueryParam(pavilions.value ?? [])
 
   const url = `${origin}${query}`
   copyText(url).then(async () => {
-    await modal.patch({ url })
+    await sharingModal.patch({ url })
   })
 
   await new Promise(resolve => setTimeout(resolve, 5000))
-  if (!modal.isOpen) await modal.close()
+  if (!sharingModal.isOpen) await sharingModal.close()
+}
+
+const tierDetailModal = overlay.create(LazyModalTierDetail)
+const showTierDetail = async (heading: string, pavilions: PavilionWithTier[], tierGroupItem: RadioGroupItem[]) => {
+  await tierDetailModal.open({
+    heading, pavilions, tierGroupItem
+  })
 }
 
 </script>
@@ -94,7 +101,7 @@ const doShareing = async () => {
         @change-reserve-filter-value="changeReserveFilterValue" @change-type-filter-value="changeTypeFilterValue"
         @do-shareing="doShareing" />
       <TierListTable :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
-        @change-tier="changeTier" />
+        @change-tier="changeTier" @show-tier-detail="showTierDetail" />
       <TierListSelectingPavilion :tier-group-item :pavilions="pavilions ?? []" :reserve-filter-value :type-filter-value
         @change-tier="changeTier" />
       <UtilBackgroundCircle />
