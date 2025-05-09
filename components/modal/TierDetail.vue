@@ -16,7 +16,7 @@ const changeTier = (newTier: Tier, title: string) => {
 </script>
 
 <template>
-  <UModal fullscreen :close="{ onClick: () => emit('close', false) }" :title="`${heading} ティアに設定したパビリオン一覧`">
+  <UModal fullscreen :close="{ onClick: () => emit('close', false) }" :title="`${heading}に設定したパビリオン一覧`">
     <template #body>
       <div class="grid grid-cols-[repeat(auto-fit,110px)] gap-2 p-2 overflow-y-scroll justify-center h-full">
         <UtilTierCard v-for="p in pavilions" :key="p.title" :title="p.title" :img="p.img" :tier-item="tierGroupItem"
