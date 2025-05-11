@@ -5,6 +5,10 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   app: {
     head: {
+      title: "ばんぱく！Tier メーカー！", // default fallback title
+      htmlAttrs: {
+        lang: "ja",
+      },
       link: [
         { rel: "icon", type: "image/png", href: "/favicon.png" },
         { rel: "shortcut icon", href: "/favicon.ico" },
