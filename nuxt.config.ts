@@ -61,12 +61,21 @@ export default defineNuxtConfig({
     },
   },
 
+  scripts: {
+    registry: {
+      googleAnalytics: {
+        id: "G-5ZLQRQZJP4",
+      },
+    },
+  },
+
   modules: [
     "@nuxt/eslint",
     "@nuxt/icon",
     "@nuxt/image",
     "@nuxt/test-utils",
     "@nuxt/ui",
+    "@nuxt/scripts",
   ],
   css: ["~/assets/css/main.css"],
   vite: {
