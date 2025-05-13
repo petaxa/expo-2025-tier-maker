@@ -55,6 +55,10 @@ const TIER = {
     JP: "D ティア",
     EN: "d-tier",
   },
+  E_TIER: {
+    JP: "E ティア",
+    EN: "e-tier",
+  },
   UNCHOOSED: {
     JP: "未選択",
     EN: "unchoosed",
