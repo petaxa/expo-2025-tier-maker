@@ -29,7 +29,7 @@ const changeTier = (newTier: Tier, title: string) => {
         <template #content>
           <div class="grid grid-cols-[repeat(auto-fit,110px)] gap-2 p-2 overflow-y-scroll justify-center">
             <div v-for="p in unchoosed" :key="p.title" class="text-center">
-              <UtilTierCard :title="p.title" :img="p.img" :tier-item="tierGroupItem" :default-tier="p.tier"
+              <UtilTierCard :title="p.title" :img="p.img" :tier-item="tierGroupItem" :default-tier="p.tier" :is-show-tooltip="true"
                 class="place-self-center" card-size="lg" @change-tier="changeTier" />
               <p>{{ useLightTitle(p.title) }}</p>
             </div>
