@@ -41,7 +41,7 @@ const cardSizeClassName = computed(() => {
 
     <div class="flex max-w-[98vw] w-full overflow-x-auto scroll-bar">
       <div v-for="pavilion in pavilions" :key="pavilion.title">
-        <UtilTierCard :title="pavilion.title" :img="pavilion.img" :tier-item :card-size :default-tier="pavilion.tier"
+        <UtilTierCard :title="pavilion.title" :img="pavilion.img" :tier-item :card-size :default-tier="pavilion.tier" :is-show-tooltip="false"
           @change-tier="changeTier" />
       </div>
     </div>
