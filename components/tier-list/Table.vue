@@ -28,11 +28,12 @@ const tiers = [
   { en: CONST.TIER.B_TIER.EN, jp: CONST.TIER.B_TIER.JP },
   { en: CONST.TIER.C_TIER.EN, jp: CONST.TIER.C_TIER.JP },
   { en: CONST.TIER.D_TIER.EN, jp: CONST.TIER.D_TIER.JP },
+  { en: CONST.TIER.E_TIER.EN, jp: CONST.TIER.E_TIER.JP },
 ]
 </script>
 
 <template>
-  <div class="h-full grid grid-rows-5 gap-1">
+  <div class="h-full grid grid-rows-6 gap-1">
     <div v-for="tier in tiers" :key="tier.en" class="min-h-0 overflow-y-auto">
       <UtilTierRow :pavilions="filterPavilion(pavilions, tier.en, reserveFilterValue, typeFilterValue)"
         :heading="tier.jp" :tier-item="tierGroupItem" card-size="lg" @change-tier="changeTier"

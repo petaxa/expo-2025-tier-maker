@@ -22,11 +22,11 @@ const showTierDetail = () => {
 const cardSizeClassName = computed(() => {
   switch (props.cardSize) {
     case "sm":
-      return "h-[45px] md:h-[60px] lg:h-[55px]"
+      return "h-[45px] md:h-[55px] lg:h-[55px]"
     case "md":
       return "h-[65px] md:h-[75px] lg:h-[75px]"
     case "lg":
-      return "h-[85px] md:h-[125px] lg:h-[125px]"
+      return "h-[50px] md:h-[90px] lg:h-[90px]"
     default:
       return ""
   }

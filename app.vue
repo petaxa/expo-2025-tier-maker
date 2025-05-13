@@ -55,6 +55,7 @@ const tierGroupItem: RadioGroupItem[] = [
   { label: CONST.TIER.B_TIER.JP, value: CONST.TIER.B_TIER.EN },
   { label: CONST.TIER.C_TIER.JP, value: CONST.TIER.C_TIER.EN },
   { label: CONST.TIER.D_TIER.JP, value: CONST.TIER.D_TIER.EN },
+  { label: CONST.TIER.E_TIER.JP, value: CONST.TIER.E_TIER.EN },
   { label: CONST.TIER.UNCHOOSED.JP, value: CONST.TIER.UNCHOOSED.EN },
 ]
 
