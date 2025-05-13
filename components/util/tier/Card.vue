@@ -27,7 +27,7 @@ const cardSizeClassName = computed(() => {
     case "md":
       return "w-[50px] md:w-[60px] lg:w-[60px]"
     case "lg":
-      return "w-[70px] md:w-[90px] lg:w-[90px]"
+      return "w-[70px] md:w-[75px] lg:w-[75px]"
     default:
       return ""
   }
