@@ -1,6 +1,6 @@
 import type { PavilionWithTier } from "~/shared/types/pavilion";
 
-export type OmissionTierGroups = Record<"s" | "a" | "b" | "c" | "d", string[]>;
+export type OmissionTierGroups = Record<"s" | "a" | "b" | "c" | "d" | "e", string[]>;
 export const createTierQueryParam = (pavilions: PavilionWithTier[]): string => {
   const omissionTier: OmissionTierGroups = assortTier(pavilions);
 
@@ -17,6 +17,7 @@ const assortTier = (pavilions: PavilionWithTier[]): OmissionTierGroups => {
   const b: string[] = [];
   const c: string[] = [];
   const d: string[] = [];
+  const e: string[] = [];
 
   pavilions.forEach((p) => {
     switch (p.tier) {
@@ -35,6 +36,9 @@ const assortTier = (pavilions: PavilionWithTier[]): OmissionTierGroups => {
       case "d-tier":
         d.push(p.id);
         break;
+      case "e-tier":
+        e.push(p.id);
+        break;
     }
   });
 
@@ -44,5 +48,6 @@ const assortTier = (pavilions: PavilionWithTier[]): OmissionTierGroups => {
     b,
     c,
     d,
+    e
   };
 };
